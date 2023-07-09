@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .body {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .container {
+            width: 800px;
+            margin: auto;
+        }
+
+        .box {
+            width: 700px;
+            height: 200px;
+            margin: 10px auto;
+            border: 10px solid rgb(15, 1, 49);
+            background-color: rgb(15, 1, 49);
+            display: flex;
+            position: relative;
+        }
+
+        .bar {
+            position: absolute;
+            bottom: 0;
+            height: 100%;
+            transition: height 1s cubic-bezier(0.45, 0, 0.55, 1);
+            width: 20%;
+        }
+
+        .bar:nth-child(1) {
+            background-color: aqua;
+
+        }
+
+        .bar:nth-child(2) {
+            background-color: blueviolet;
+            left: 20%;
+
+
+        }
+
+        .bar:nth-child(3) {
+            background-color: greenyellow;
+            left: 40%;
+
+        }
+
+        .bar:nth-child(4) {
+            background-color: palevioletred;
+            left: 60%;
+
+
+        }
+
+        .bar:nth-child(5) {
+            background-color: orangered;
+            left: 80%;
+
+        }
+
+        .btns {
+            height: 100px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        .btn {
+            background-color: black;
+            color: white;
+            border: none;
+            width: 100px;
+            height: 25px;
+            cursor: pointer;
+        }
+
+        .btn:nth-child(1) {
+            background-color: green;
+        }
+
+        .btn:nth-child(2) {
+            background-color: blueviolet;
+        }
+
+        .btn:nth-child(3) {
+            background-color: orangered;
+        }
+    </style>
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="box">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+        <div class="btns">
+            <button class="btn" onclick="start()">Start</button><button class="btn"
+                onclick="reset()">Reset</button><button class="btn" onclick="stop()">Stop</button>
+        </div>
+    </div>
+</body>
+<script>
+
+    let arr = [84, 45, 63, 90, 32]
+    let intervalId = null;
+    let bar = []
+    function start() {
+        bar = document.getElementsByClassName("bar")
+        bar = Array.from(bar)
+        bar.forEach((a, i) => {
+            a.style.height = arr[i] + '%';
+        });
+        intervalId = setInterval(() => {
+            arr = [];
+            for (let i = 0; i < 5; i++) {
+                arr.push(Math.floor(Math.random() * 85) + 10)
+            }
+            // console.log(arr)
+            bar.forEach((a, i) => {
+                a.style.height = arr[i] + '%';
+            });
+
+        }, 1000)
+    }
+
+    function stop() {
+        clearInterval(intervalId);
+        intervalId = null;
+    }
+
+    function reset() {
+        stop()
+        bar.forEach((a) => {
+            a.style.height = '100%';
+        });
+    }
+
+</script>
+
+</html>
